@@ -1196,6 +1196,9 @@ def calc_night_duration(power_profile, percent_at_night=0, validate=True):
                 night_df.iloc[i, -2] = True
                 night_df.iloc[i, -1] = night_lengths.pop(0)
         night_df['night_duration'] = night_df['night_duration'].ffill()
+    else:
+        # Still set is_first_hour_of_night
+         night_df['is_first_hour_of_night'] = False
     night_df.loc[~night_df['is_night'], 'night_duration'] = 0
 
     return night_df
