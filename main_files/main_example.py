@@ -50,9 +50,13 @@ def run_mcor(input_dict):
 
         if pv_inputs['get_solar_data']:
             spg.get_solar_data()
+        elif pv_inputs['load_solar_data']:
+            spg.load_solar_data(pv_inputs['solar_data'])
 
         if pv_inputs['get_solar_profiles']:
             spg.get_solar_profiles(system_inputs['start_datetimes'])
+        elif pv_inputs['load_solar_profiles']:
+            spg.load_solar_profiles(pv_inputs['solar_profiles'])
 
         print('Calculating power profiles...')
         spg.get_power_profiles()
@@ -211,6 +215,10 @@ if __name__ == "__main__":
         'advanced_inputs': {},
         'get_solar_data_from_file': True,
         'get_solar_profiles_from_file': True,
+        'load_solar_data': False,
+        'load_solar_profiles': False,
+        'solar_data': {},
+        'solar_profiles': [],
         'get_solar_data': True,
         'get_solar_profiles': True
     }
