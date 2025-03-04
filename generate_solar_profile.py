@@ -428,7 +428,8 @@ class SolarProfileGenerator:
         for profile in solar_profile_list:
             profile_df = pd.DataFrame.from_dict(profile)
             profile_df.index = profile_df.index.map(lambda x: datetime.datetime.strptime(x, datetime_format))
-            profile_df['date'] = profile_df['date'].map(lambda x: datetime.datetime.strptime(x, date_format))
+            if 'date' in profile_df:
+                profile_df['date'] = profile_df['date'].map(lambda x: datetime.datetime.strptime(x, date_format))
             self.solar_profiles += [profile_df]
             
     def get_power_profiles(self):
