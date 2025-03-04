@@ -322,14 +322,14 @@ class SolarProfileGenerator:
     def load_solar_data(self, solar_data_dict):
         """ Load NREL solar data from a dictionary.
             To create dict that can be saved as a json:
-                datetime_format = '%Y-%m-%d %H:%M:%S%z %Z'
+                datetime_format = '%Y-%m-%d %H:%M:%S%z'
                 spg.solar_data['tmy'].index = spg.solar_data['tmy'].index.map(lambda x: x.strftime(datetime_format))
                 solar_data_dict = {k: v.to_dict() for k, v in spg.solar_data.items()}
                 
         """
         for key, val in solar_data_dict.items():
             self.solar_data[key] = pd.DataFrame.from_dict(val)
-        datetime_format = '%Y-%m-%d %H:%M:%S%z %Z'
+        datetime_format = '%Y-%m-%d %H:%M:%S%z'
         self.solar_data['tmy'].index = self.solar_data['tmy'].index.map(lambda x: datetime.datetime.strptime(x, datetime_format))
 
     def get_wind_speed(self):
@@ -414,7 +414,7 @@ class SolarProfileGenerator:
         """ Load solar profiles from a list.
         
             To create list that can be saved as a json:
-                datetime_format = '%Y-%m-%d %H:%M:%S%z %Z'
+                datetime_format = '%Y-%m-%d %H:%M:%S%z'
                 date_format = '%Y-%m-%d'
                 solar_profile_list = []
                 for elem in spg.solar_profiles:
@@ -423,7 +423,7 @@ class SolarProfileGenerator:
                 solar_profile_json = json.dumps([elem.to_dict() for elem in spg.solar_profiles])
         """
 
-        datetime_format = '%Y-%m-%d %H:%M:%S%z %Z'
+        datetime_format = '%Y-%m-%d %H:%M:%S%z'
         date_format = '%Y-%m-%d'
         for profile in solar_profile_list:
             profile_df = pd.DataFrame.from_dict(profile)
