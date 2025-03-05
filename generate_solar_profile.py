@@ -328,6 +328,8 @@ class SolarProfileGenerator:
                 
         """
         for key, val in solar_data_dict.items():
+            if key != 'tmy':
+                key = int(key)
             self.solar_data[key] = pd.DataFrame.from_dict(val)
         datetime_format = '%Y-%m-%d %H:%M:%S%z'
         self.solar_data['tmy'].index = self.solar_data['tmy'].index.map(lambda x: datetime.datetime.strptime(x, datetime_format))
