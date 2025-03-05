@@ -865,6 +865,8 @@ def download_solar_data(latitude=46.34, longitude=-119.28, path='.', TMY=False,
                         solar_dict[name] = pd.read_csv(io.StringIO(
                             response.content.decode('utf-8')), skiprows=skiprows)
                         success = 1
+                elif response.status_code == 502:
+                    raise TimeoutError
                 else:
                     message = f'Error downloading NSRDB data > {response.text}'
                     raise Exception(message)
